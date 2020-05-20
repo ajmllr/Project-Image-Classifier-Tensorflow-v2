@@ -1,7 +1,6 @@
 import warnings
 warnings.filterwarnings('ignore')
 
-
 import tensorflow as tf
 from utils import process_image, get_processed_image, load_model, get_class_names
 
@@ -27,7 +26,7 @@ def predict(image_path, model, top_k, category_names, dev=False):
     values, indices = tf.math.top_k(prediction, top_k)
     values = values.numpy()[0]
 
-    classes = [class_names[str(value)] for value in indices.cpu().numpy()[0]]
+    classes = [class_names[str(value+1)] for value in indices.cpu().numpy()[0]]
     
     if dev:
         print("model.summary")
